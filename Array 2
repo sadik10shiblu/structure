@@ -13,6 +13,7 @@ for(i=0;i<4;i++){
 printf("Enter information for person:%d\n",i+1);
 printf("Enter the name: ");
 gets(person[i].name);
+fflush(stdin);
 printf("Enter age: ");
 scanf("%d",&person[i].age);
 printf("Enter salary: ");
