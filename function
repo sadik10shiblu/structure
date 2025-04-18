@@ -1,0 +1,29 @@
+
+#include<stdio.h>
+struct person
+{
+    char name[20];
+    int age;
+    float salary;
+};
+void display(struct person p)
+{
+    printf("Name :%s\n",p.name);
+    printf("Age :%d\n",p.age);
+    printf("Name :%f\n",p.salary);
+}
+int main(){
+struct person person1,person2;
+strcpy(person1.name,"Foyoder Dostoyvoskey");
+person1.age=27;
+person1.salary=12555.50;
+
+display(person1);
+
+strcpy(person2.name,"Al Gazali");
+person2.age=25;
+person2.salary=22555.50;
+
+display(person2);
+return 0;
+}
