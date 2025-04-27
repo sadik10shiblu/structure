@@ -1,0 +1,71 @@
+#include<stdio.h>
+
+struct Account_info
+{
+    char name[50];   // name (small letters)
+    int accountNumber;
+    float balance;
+};
+
+void low_balance_customer(struct Account_info customer[20], int size)
+{
+    int i;
+    printf("\nCustomers with less than 200 balance:\n");
+    for(i=0; i<size; i++) {
+        if(customer[i].balance < 200) {
+            printf("%s\n", customer[i].name);
+        }
+    }
+}
+
+void special_increament(struct Account_info customer[20], int size)
+{
+    int i;
+    printf("\nCustomers with more than 1000 balance (after increment):\n");
+    for(i=0; i<size; i++) {
+        if(customer[i].balance > 1000) {
+            customer[i].balance = customer[i].balance + 100;
+            printf("Name: %s, Updated Balance: %.2f\n", customer[i].name, customer[i].balance);
+        }
+    }
+}
+
+void write_to_file(struct Account_info customer[], int size)
+{
+    int i;
+    FILE *file;
+    file = fopen("Bank_info.txt", "w");
+    if(file == NULL) {
+        printf("No file found\n");
+        return;
+    }
+    fprintf(file, "Customer Name\tBalance\n");
+    for(i=0; i<size; i++) {
+        fprintf(file, "%s\t\t%.2f\n", customer[i].name, customer[i].balance);
+    }
+    fclose(file);
+}
+
+int main()
+{
+    int i;
+    struct Account_info customer[20];
+    printf("Enter information for 20 customers: \n");
+    
+    for(i=0; i<20; i++) {
+        printf("\nCustomer %d\n", i+1);
+        printf("Name: ");
+        fflush(stdin);  // bad practice but okay for now
+        gets(customer[i].name);
+        printf("Account Number: ");
+        scanf("%d", &customer[i].accountNumber);
+        printf("Balance: ");
+        scanf("%f", &customer[i].balance);
+    }
+    
+    low_balance_customer(customer, 20);
+    special_increament(customer, 20);
+    write_to_file(customer, 20);
+    
+    return 0;
+}
